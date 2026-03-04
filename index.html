@@ -1,123 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Income Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Income Calculator</title>
 
-  <style>
-    body{
-      background:#F7F2EF;
-      font-family:'Montserrat', sans-serif;
-      padding:40px;
-      color:#22252A;
-      margin:0;
-    }
-    .container{ max-width:820px; margin:0 auto; }
-    .grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
-    .card{
-      background:white;
-      padding:26px;
-      border-radius:16px;
-      box-shadow:0 8px 20px rgba(0,0,0,.05);
-    }
-    label{ font-size:18px; font-weight:500; display:block; margin-bottom:8px; }
-    .description{ font-size:14px; color:#6b6e72; margin-bottom:16px; line-height:1.45; }
-    .value{ font-size:28px; margin-bottom:8px; color:#7E8C7A; font-weight:500; }
-    .result-label{ font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:#6b6e72; margin-bottom:10px; }
-    .result{ font-size:40px; color:#7E8C7A; font-weight:500; }
-    .roi{ font-size:14px; margin-top:10px; color:#6b6e72; line-height:1.45; }
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
-    input[type=range]{
-      width:100%;
-      appearance:none;
-      height:6px;
-      border-radius:4px;
-      background:#e6e2df;
-      outline:none;
-    }
-    input[type=range]::-webkit-slider-thumb{
-      appearance:none;
-      height:18px;
-      width:18px;
-      border-radius:50%;
-      background:#7E8C7A;
-      cursor:pointer;
-    }
+<style>
 
-    @media (max-width:700px){
-      .grid{ grid-template-columns:1fr; }
-    }
-  </style>
+body{
+background:#F7F2EF;
+font-family:'Montserrat', sans-serif;
+padding:40px;
+color:#22252A;
+margin:0;
+}
+
+.container{
+max-width:820px;
+margin:auto;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:22px;
+}
+
+.card{
+background:white;
+padding:26px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+label{
+font-size:18px;
+font-weight:500;
+display:block;
+margin-bottom:8px;
+}
+
+.description{
+font-size:14px;
+color:#6b6e72;
+margin-bottom:16px;
+line-height:1.45;
+}
+
+.value{
+font-size:28px;
+margin-bottom:8px;
+color:#7E8C7A;
+font-weight:500;
+}
+
+.result-label{
+font-size:13px;
+letter-spacing:.06em;
+text-transform:uppercase;
+color:#6b6e72;
+margin-bottom:10px;
+}
+
+.result{
+font-size:40px;
+color:#7E8C7A;
+font-weight:500;
+}
+
+input[type=range]{
+width:100%;
+appearance:none;
+height:6px;
+border-radius:4px;
+background:#e6e2df;
+outline:none;
+}
+
+input[type=range]::-webkit-slider-thumb{
+appearance:none;
+height:18px;
+width:18px;
+border-radius:50%;
+background:#7E8C7A;
+cursor:pointer;
+}
+
+@media (max-width:700px){
+.grid{
+grid-template-columns:1fr;
+}
+}
+
+</style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="grid">
 
-      <div class="card">
-        <label>How many clients do you want to see weekly?</label>
-        <div class="description">
-          An aligned brand empowers you to build a practice that actually supports your life.
-        </div>
-        <div class="value" id="clientsValue">21</div>
-        <input type="range" min="10" max="35" value="21" id="clientsSlider">
-      </div>
+<div class="container">
 
-      <div class="card">
-        <label>What's your ideal session rate?</label>
-        <div class="description">
-          Intentional branding helps you resonate with the right clients and confidently charge your value.
-        </div>
-        <div class="value" id="rateValue">$120</div>
-        <input type="range" min="75" max="250" value="120" id="rateSlider">
-      </div>
+<div class="grid">
 
-      <div class="card">
-        <div class="result-label">Est. Monthly Income</div>
-        <div class="result" id="monthly">$10,080</div>
-      </div>
+<div class="card">
 
-      <div class="card">
-        <div class="result-label">Est. Annual Income</div>
-        <div class="result" id="annual">$120,960</div>
-        <div class="roi" id="roiText"></div>
-      </div>
+<label>How many clients do you want to see weekly?</label>
 
-    </div>
-  </div>
+<div class="description">
+An aligned brand empowers you to build a practice that actually supports your life.
+</div>
 
-  <script>
-    const clients = document.getElementById("clientsSlider");
-    const rate = document.getElementById("rateSlider");
+<div class="value" id="clientsValue">21</div>
 
-    const clientsValue = document.getElementById("clientsValue");
-    const rateValue = document.getElementById("rateValue");
+<input type="range" min="10" max="35" value="21" id="clientsSlider">
 
-    const monthly = document.getElementById("monthly");
-    const annual = document.getElementById("annual");
-    const roiText = document.getElementById("roiText");
+</div>
 
-    function calculate(){
-      const weeklyClients = Number(clients.value);
-      const sessionRate = Number(rate.value);
+<div class="card">
 
-      clientsValue.textContent = weeklyClients;
-      rateValue.textContent = "$" + sessionRate;
+<label>What's your ideal session rate?</label>
 
-      const monthlyIncome = weeklyClients * sessionRate * 4.3;
-      const yearlyIncome = monthlyIncome * 12;
+<div class="description">
+Intentional branding helps you resonate with the right clients and confidently charge your value.
+</div>
 
-      monthly.textContent = "$" + Math.round(monthlyIncome).toLocaleString();
-      annual.textContent = "$" + Math.round(yearlyIncome).toLocaleString();
-      }
-    }
+<div class="value" id="rateValue">$120</div>
 
-    clients.addEventListener("input", calculate);
-    rate.addEventListener("input", calculate);
+<input type="range" min="75" max="250" value="120" id="rateSlider">
 
-    calculate();
-  </script>
+</div>
+
+<div class="card">
+
+<div class="result-label">
+Est. Monthly Income
+</div>
+
+<div class="result" id="monthly">
+$10,080
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="result-label">
+Est. Annual Income
+</div>
+
+<div class="result" id="annual">
+$120,960
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const clients = document.getElementById("clientsSlider");
+const rate = document.getElementById("rateSlider");
+
+const clientsValue = document.getElementById("clientsValue");
+const rateValue = document.getElementById("rateValue");
+
+const monthly = document.getElementById("monthly");
+const annual = document.getElementById("annual");
+
+function calculate(){
+
+const weeklyClients = Number(clients.value);
+const sessionRate = Number(rate.value);
+
+clientsValue.textContent = weeklyClients;
+rateValue.textContent = "$" + sessionRate;
+
+const monthlyIncome = weeklyClients * sessionRate * 4.3;
+const yearlyIncome = monthlyIncome * 12;
+
+monthly.textContent =
+"$" + Math.round(monthlyIncome).toLocaleString();
+
+annual.textContent =
+"$" + Math.round(yearlyIncome).toLocaleString();
+
+}
+
+clients.addEventListener("input", calculate);
+rate.addEventListener("input", calculate);
+
+calculate();
+
+</script>
+
 </body>
 </html>
