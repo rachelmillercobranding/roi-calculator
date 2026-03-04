@@ -1,221 +1,132 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Income Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    body{
+      background:#F7F2EF;
+      font-family:'Montserrat', sans-serif;
+      padding:40px;
+      color:#22252A;
+      margin:0;
+    }
+    .container{ max-width:820px; margin:0 auto; }
+    .grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+    .card{
+      background:white;
+      padding:26px;
+      border-radius:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,.05);
+    }
+    label{ font-size:18px; font-weight:500; display:block; margin-bottom:8px; }
+    .description{ font-size:14px; color:#6b6e72; margin-bottom:16px; line-height:1.45; }
+    .value{ font-size:28px; margin-bottom:8px; color:#7E8C7A; font-weight:500; }
+    .result-label{ font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:#6b6e72; margin-bottom:10px; }
+    .result{ font-size:40px; color:#7E8C7A; font-weight:500; }
+    .roi{ font-size:14px; margin-top:10px; color:#6b6e72; line-height:1.45; }
+
+    input[type=range]{
+      width:100%;
+      appearance:none;
+      height:6px;
+      border-radius:4px;
+      background:#e6e2df;
+      outline:none;
+    }
+    input[type=range]::-webkit-slider-thumb{
+      appearance:none;
+      height:18px;
+      width:18px;
+      border-radius:50%;
+      background:#7E8C7A;
+      cursor:pointer;
+    }
+
+    @media (max-width:700px){
+      .grid{ grid-template-columns:1fr; }
+    }
   </style>
 </head>
+
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;display=swap" rel="stylesheet"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">body{</p>
-<p class="p1">background:#F7F2EF;</p>
-<p class="p1">font-family:'Montserrat', sans-serif;</p>
-<p class="p1">padding:40px;</p>
-<p class="p1">color:#22252A;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.container{</p>
-<p class="p1">max-width:820px;</p>
-<p class="p1">margin:auto;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.grid{</p>
-<p class="p1">display:grid;</p>
-<p class="p1">grid-template-columns:1fr 1fr;</p>
-<p class="p1">gap:22px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.card{</p>
-<p class="p1">background:white;</p>
-<p class="p1">padding:26px;</p>
-<p class="p1">border-radius:16px;</p>
-<p class="p1">box-shadow:0 8px 20px rgba(0,0,0,.05);</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">label{</p>
-<p class="p1">font-size:18px;</p>
-<p class="p1">font-weight:500;</p>
-<p class="p1">display:block;</p>
-<p class="p1">margin-bottom:8px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.description{</p>
-<p class="p1">font-size:14px;</p>
-<p class="p1">color:#6b6e72;</p>
-<p class="p1">margin-bottom:16px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.value{</p>
-<p class="p1">font-size:28px;</p>
-<p class="p1">margin-bottom:8px;</p>
-<p class="p1">color:#7E8C7A;</p>
-<p class="p1">font-weight:500;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.result-label{</p>
-<p class="p1">font-size:13px;</p>
-<p class="p1">letter-spacing:.06em;</p>
-<p class="p1">text-transform:uppercase;</p>
-<p class="p1">color:#6b6e72;</p>
-<p class="p1">margin-bottom:10px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.result{</p>
-<p class="p1">font-size:40px;</p>
-<p class="p1">color:#7E8C7A;</p>
-<p class="p1">font-weight:500;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.roi{</p>
-<p class="p1">font-size:14px;</p>
-<p class="p1">margin-top:10px;</p>
-<p class="p1">color:#6b6e72;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">input[type=range]{</p>
-<p class="p1">width:100%;</p>
-<p class="p1">appearance:none;</p>
-<p class="p1">height:6px;</p>
-<p class="p1">border-radius:4px;</p>
-<p class="p1">background:#e6e2df;</p>
-<p class="p1">outline:none;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">input[type=range]::-webkit-slider-thumb{</p>
-<p class="p1">appearance:none;</p>
-<p class="p1">height:18px;</p>
-<p class="p1">width:18px;</p>
-<p class="p1">border-radius:50%;</p>
-<p class="p1">background:#7E8C7A;</p>
-<p class="p1">cursor:pointer;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">@media(max-width:700px){</p>
-<p class="p1">.grid{</p>
-<p class="p1">grid-template-columns:1fr;</p>
-<p class="p1">}</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="grid"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="card"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;label&gt;How many clients do you want to see weekly?&lt;/label&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="description"&gt;</p>
-<p class="p1">An aligned brand empowers you to build a practice that actually supports your life.</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="value" id="clientsValue"&gt;21&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;input type="range" min="10" max="35" value="21" id="clientsSlider"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="card"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;label&gt;What's your ideal session rate?&lt;/label&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="description"&gt;</p>
-<p class="p1">Intentional branding helps you resonate with the right clients and confidently charge your value.</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="value" id="rateValue"&gt;$120&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;input type="range" min="75" max="250" value="120" id="rateSlider"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="card"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="result-label"&gt;Est. Monthly Income&lt;/div&gt;</p>
-<p class="p1">&lt;div class="result" id="monthly"&gt;$10,080&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="card"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="result-label"&gt;Est. Annual Income&lt;/div&gt;</p>
-<p class="p1">&lt;div class="result" id="annual"&gt;$120,960&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="roi" id="roiText"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">const clients = document.getElementById("clientsSlider")</p>
-<p class="p1">const rate = document.getElementById("rateSlider")</p>
-<p class="p2"><br></p>
-<p class="p1">const clientsValue = document.getElementById("clientsValue")</p>
-<p class="p1">const rateValue = document.getElementById("rateValue")</p>
-<p class="p2"><br></p>
-<p class="p1">const monthly = document.getElementById("monthly")</p>
-<p class="p1">const annual = document.getElementById("annual")</p>
-<p class="p1">const roiText = document.getElementById("roiText")</p>
-<p class="p2"><br></p>
-<p class="p1">function calculate(){</p>
-<p class="p2"><br></p>
-<p class="p1">const weeklyClients = clients.value</p>
-<p class="p1">const sessionRate = rate.value</p>
-<p class="p2"><br></p>
-<p class="p1">clientsValue.innerText = weeklyClients</p>
-<p class="p1">rateValue.innerText = "$" + sessionRate</p>
-<p class="p2"><br></p>
-<p class="p1">const monthlyIncome = weeklyClients * sessionRate * 4.3</p>
-<p class="p1">const yearlyIncome = monthlyIncome * 12</p>
-<p class="p2"><br></p>
-<p class="p1">monthly.innerText = "$" + Math.round(monthlyIncome).toLocaleString()</p>
-<p class="p1">annual.innerText = "$" + Math.round(yearlyIncome).toLocaleString()</p>
-<p class="p2"><br></p>
-<p class="p1">const baseline = 100</p>
-<p class="p1">const increase = sessionRate - baseline</p>
-<p class="p2"><br></p>
-<p class="p1">if(increase &gt; 0){</p>
-<p class="p1">const extra = weeklyClients * increase * 4.3 * 12</p>
-<p class="p1">roiText.innerText = "Increasing your rate from $100 to $" + sessionRate + " adds about $" + Math.round(extra).toLocaleString() + " per year."</p>
-<p class="p1">}else{</p>
-<p class="p1">roiText.innerText = ""</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">clients.oninput = calculate</p>
-<p class="p1">rate.oninput = calculate</p>
-<p class="p2"><br></p>
-<p class="p1">calculate()</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <div class="container">
+    <div class="grid">
+
+      <div class="card">
+        <label>How many clients do you want to see weekly?</label>
+        <div class="description">
+          An aligned brand empowers you to build a practice that actually supports your life.
+        </div>
+        <div class="value" id="clientsValue">21</div>
+        <input type="range" min="10" max="35" value="21" id="clientsSlider">
+      </div>
+
+      <div class="card">
+        <label>What's your ideal session rate?</label>
+        <div class="description">
+          Intentional branding helps you resonate with the right clients and confidently charge your value.
+        </div>
+        <div class="value" id="rateValue">$120</div>
+        <input type="range" min="75" max="250" value="120" id="rateSlider">
+      </div>
+
+      <div class="card">
+        <div class="result-label">Est. Monthly Income</div>
+        <div class="result" id="monthly">$10,080</div>
+      </div>
+
+      <div class="card">
+        <div class="result-label">Est. Annual Income</div>
+        <div class="result" id="annual">$120,960</div>
+        <div class="roi" id="roiText"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const clients = document.getElementById("clientsSlider");
+    const rate = document.getElementById("rateSlider");
+
+    const clientsValue = document.getElementById("clientsValue");
+    const rateValue = document.getElementById("rateValue");
+
+    const monthly = document.getElementById("monthly");
+    const annual = document.getElementById("annual");
+    const roiText = document.getElementById("roiText");
+
+    function calculate(){
+      const weeklyClients = Number(clients.value);
+      const sessionRate = Number(rate.value);
+
+      clientsValue.textContent = weeklyClients;
+      rateValue.textContent = "$" + sessionRate;
+
+      const monthlyIncome = weeklyClients * sessionRate * 4.3;
+      const yearlyIncome = monthlyIncome * 12;
+
+      monthly.textContent = "$" + Math.round(monthlyIncome).toLocaleString();
+      annual.textContent = "$" + Math.round(yearlyIncome).toLocaleString();
+
+      const baseline = 100;
+      const increase = sessionRate - baseline;
+
+      if(increase > 0){
+        const extra = weeklyClients * increase * 4.3 * 12;
+        roiText.textContent = `Increasing your rate from $${baseline} to $${sessionRate} adds about $${Math.round(extra).toLocaleString()} per year.`;
+      } else {
+        roiText.textContent = "";
+      }
+    }
+
+    clients.addEventListener("input", calculate);
+    rate.addEventListener("input", calculate);
+
+    calculate();
+  </script>
 </body>
 </html>
