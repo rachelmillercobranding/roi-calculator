@@ -111,15 +111,6 @@
 
       monthly.textContent = "$" + Math.round(monthlyIncome).toLocaleString();
       annual.textContent = "$" + Math.round(yearlyIncome).toLocaleString();
-
-      const baseline = 100;
-      const increase = sessionRate - baseline;
-
-      if(increase > 0){
-        const extra = weeklyClients * increase * 4.3 * 12;
-        roiText.textContent = `Increasing your rate from $${baseline} to $${sessionRate} adds about $${Math.round(extra).toLocaleString()} per year.`;
-      } else {
-        roiText.textContent = "";
       }
     }
 
