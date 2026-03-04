@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Income Calculator</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -95,6 +98,7 @@ grid-template-columns:1fr;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -113,7 +117,13 @@ An aligned brand empowers you to build a practice that actually supports your li
 
 <div class="value" id="clientsValue">21</div>
 
-<input type="range" min="10" max="35" value="21" id="clientsSlider">
+<input
+type="range"
+min="10"
+max="35"
+value="21"
+id="clientsSlider"
+>
 
 </div>
 
@@ -127,7 +137,13 @@ Intentional branding helps you resonate with the right clients and confidently c
 
 <div class="value" id="rateValue">$120</div>
 
-<input type="range" min="75" max="250" value="120" id="rateSlider">
+<input
+type="range"
+min="75"
+max="250"
+value="120"
+id="rateSlider"
+>
 
 </div>
 
@@ -189,12 +205,37 @@ annual.textContent =
 
 }
 
-clients.addEventListener("input", calculate);
-rate.addEventListener("input", calculate);
+/* Normal event listeners */
+
+["input","change","mouseup","touchend"].forEach(evt => {
+
+clients.addEventListener(evt, calculate);
+rate.addEventListener(evt, calculate);
+
+});
+
+/* Fallback for sandboxed embeds (HoneyBook etc) */
+
+let lastClients = clients.value;
+let lastRate = rate.value;
+
+setInterval(() => {
+
+if(clients.value !== lastClients || rate.value !== lastRate){
+
+lastClients = clients.value;
+lastRate = rate.value;
+
+calculate();
+
+}
+
+},150);
 
 calculate();
 
 </script>
 
 </body>
+
 </html>
